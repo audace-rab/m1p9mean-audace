@@ -2,6 +2,9 @@
   "name": "m1p9mean-audace",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "client": "cd client && ng serve --open",
     "server": "nodemon ./bin/www",
