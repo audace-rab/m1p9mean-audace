@@ -7,12 +7,13 @@
 	"npm": "8.x"
   },
   "scripts": {
+    "ng": "ng",
     "client": "cd client && ng serve --open",
     "server": "nodemon ./bin/www",
     "build": "cd client && npm run build",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "start": "node ./bin/www",
-	"heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && ng build -prod"
+	"heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && ng build"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
