@@ -14,23 +14,23 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/user', indexRouter);
 
-app.use(function(req, res, next) {
-  next(createError(404));
-});
 
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../dist/client")));
-
+  
   app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "../dist/client", "index.html"));
   });
 }
 
+app.use(function(req, res, next) {
+  next(createError(404));
+});
 // app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
