@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('./config/mongoose');
+var {logError , sendError} = require('./middlewares/error-handler');
 
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -16,8 +17,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/user', indexRouter);
+app.use('/api', indexRouter);
 
+app.use(logError);
+app.use(sendError);
 
 
 if (process.env.NODE_ENV === "production") {
