@@ -1,5 +1,7 @@
 const User = require("../models/users");
+require("../models/profile");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const SALT_WORK_FACTOR = 10;
 
 const login = ({ login, password }, next) => {
@@ -8,6 +10,7 @@ const login = ({ login, password }, next) => {
 
   User.findOne()
     .or([{ login: login }, { email: login }])
+    .populate("profile_id")
     .exec((error, user) => {
       if (error) return next(error);
       if (!user) return next(new Error("Erreur Login: Utilisateur non trouvé"));
@@ -18,11 +21,9 @@ const login = ({ login, password }, next) => {
           return next(
             new Error("Erreur Login: Le login ou le mot de passe est erroné")
           );
-        user.generateToken((err, token) => {
-          if(err) return next(err);
+          const token = generateToken(user);
           user.token = token;
           next(null, user);
-        })
       });
     });
 };
@@ -47,17 +48,29 @@ const addNewUser = (user, next) => {
     await session.withTransaction(async () =>{
       await newUser.save((error, newUser) => {
         if (error) return next(error);
-        newUser.generateToken((error, token) => {
-          if(error) return next(error);
-          newUser.token = token;
-          next(null, newUser);
-        });
+        const token = generateToken(newUser);
+        newUser.token = token;
+        
+        next(null, newUser);
       });
     })
 
     session.endSession();
+  }).then(() => {
+    User.findOne({_id:user._id}).populate("profile_id").exec((err, usr) => {
+      if(err) return next(err);
+      next(null, usr);
+    })
+  })
+  ;
+};
+
+const generateToken = ({_id, email, profile_id}) => {
+  return jwt.sign({ _id,email, profile_id}, process.env.TOKEN_KEY, {
+    expiresIn: "2h"
   });
 };
+
 
 
 module.exports = {

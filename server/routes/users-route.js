@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router();
 const Users = require('../models/users');
 const userController = require('../controller/users.controller');
+require('../models/profile');
 const tokenHandler = require("../middlewares/auth");
+const restrictHandler = require("../middlewares/restrict");
 
 
 router.get('/', function(req, res, next) {
@@ -50,10 +52,9 @@ router.post("/hashPass", function(req, res, next){
 })
 
 
-router.get("/listAll", tokenHandler,function(req, res, next){
-  Users.find({}, (err,data) => {
-    if(err) console.log(err);
-    console.log(data);
+router.get("/listAll", tokenHandler,restrictHandler({profile:"client"}),function(req, res, next){
+  Users.find().populate("profile_id").exec((err,data) => {
+    if(err) return next(err);
     res.json(data);
   })
 })

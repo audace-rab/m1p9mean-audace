@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 
 const UsersSchema = new mongoose.Schema({
   first_name: {
@@ -26,7 +25,8 @@ const UsersSchema = new mongoose.Schema({
   },
   profile_id: {
     type: mongoose.Schema.Types.ObjectId,
-    required: [true, "Le type de profil est obligatoire"]
+    required: [true, "Le type de profil est obligatoire"],
+    ref: "Profile"
   },
   login: {
     type: String,
@@ -79,15 +79,6 @@ UsersSchema.methods.comparePassword = function(password, callback) {
       callback(null, isMatch);
     }
   });
-};
-
-UsersSchema.methods.generateToken = (next) => {
-  const token = jwt.sign({ _id: this._id, email: this.email }, process.env.TOKEN_KEY, {
-    expiresIn: "2h"
-  });
-
-  next(null,token);
-  console.log(this.token);
 };
 
 module.exports = mongoose.model("Users", UsersSchema, "users");
