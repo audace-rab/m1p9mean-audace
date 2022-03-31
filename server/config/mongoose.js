@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-require('dotenv').config();
 
 //Set up default mongoose connection
 const mongoUri = process.env.DB_URI;

@@ -3,8 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-require('./config/mongoose');
 var {logError , sendError} = require('./middlewares/error-handler');
+require('dotenv').config({ path: path.join(__dirname, `.env.${process.env.NODE_ENV}`) })
+require('./config/mongoose');
 
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -21,7 +22,6 @@ app.use('/api', indexRouter);
 
 app.use(logError);
 app.use(sendError);
-
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../dist/client")));

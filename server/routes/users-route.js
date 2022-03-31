@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const Users = require('../models/users');
 const userController = require('../controller/users.controller');
+const tokenHandler = require("../middlewares/auth");
 
 
 router.get('/', function(req, res, next) {
@@ -32,7 +33,7 @@ router.post("/login", function(req, res, next){
   }) 
 })
 
-router.post("/newUser", function(req, res, next){
+router.post("/register", function(req, res, next){
   userController.addNewUser(req.body, (error, user) => {
     if(error) return next(error);
 
@@ -46,6 +47,15 @@ router.post("/hashPass", function(req, res, next){
 
     res.json(hash);
   });
+})
+
+
+router.get("/listAll", tokenHandler,function(req, res, next){
+  Users.find({}, (err,data) => {
+    if(err) console.log(err);
+    console.log(data);
+    res.json(data);
+  })
 })
 
 

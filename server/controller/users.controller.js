@@ -1,6 +1,5 @@
 const User = require("../models/users");
 const bcrypt = require("bcryptjs");
-const Users = require("../models/users");
 const SALT_WORK_FACTOR = 10;
 
 const login = ({ login, password }, next) => {
@@ -19,8 +18,11 @@ const login = ({ login, password }, next) => {
           return next(
             new Error("Erreur Login: Le login ou le mot de passe est erroné")
           );
-
-        next(null, user);
+        user.generateToken((err, token) => {
+          if(err) return next(err);
+          user.token = token;
+          next(null, user);
+        })
       });
     });
 };
@@ -40,13 +42,23 @@ const hashPassword = ({ password: password }, callback) => {
 };
 
 const addNewUser = (user, next) => {
-  const newUser = new Users(user);
-  newUser.save((error, newUser) => {
-    if (error) return next(error);
+  User.startSession().then(async (session) => {
+    const newUser = new Users(user);
+    await session.withTransaction(async () =>{
+      await newUser.save((error, newUser) => {
+        if (error) return next(error);
+        newUser.generateToken((error, token) => {
+          if(error) return next(error);
+          newUser.token = token;
+          next(null, newUser);
+        });
+      });
+    })
 
-    next(null, newUser);
+    session.endSession();
   });
 };
+
 
 module.exports = {
   login,
