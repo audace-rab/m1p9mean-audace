@@ -6,12 +6,14 @@ var logger = require('morgan');
 var {logError , sendError} = require('./middlewares/error-handler');
 require('dotenv').config({ path: path.join(__dirname, `.env.${process.env.NODE_ENV}`) })
 require('./config/mongoose');
+var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 
 var app = express();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
