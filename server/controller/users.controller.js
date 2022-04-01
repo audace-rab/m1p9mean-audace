@@ -23,6 +23,7 @@ const login = ({ login, password }, next) => {
           );
           const token = generateToken(user);
           user.token = token;
+          user.password = '😂';
           next(null, user);
       });
     });

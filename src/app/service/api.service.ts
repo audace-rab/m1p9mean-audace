@@ -32,4 +32,8 @@ export class ApiService{
     public get(route?: string){
         return this.httpClient.get(this.getFullApiUrl(route));
     }
+
+    public post(route: string, data : any){
+        return this.httpClient.post(this.getFullApiUrl(route), data);
+    }
 }
