@@ -4,7 +4,8 @@ import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   user = {
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
         console.log(err.error);
         return err;
       })
-    ).subscribe(res => {
+    ).subscribe((res: any) => {
       console.log(res);
     })
   }
@@ -43,7 +44,7 @@ export class LoginComponent implements OnInit {
             return error;
           })
         )
-        .subscribe(data =>{
+        .subscribe((data: any) =>{
           this.handleSuccess(data);
         });
   }

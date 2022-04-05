@@ -68,7 +68,7 @@ const addNewUser = (user, next) => {
 
 const generateToken = ({_id, email, profile_id}) => {
   return jwt.sign({ _id,email, profile_id}, process.env.TOKEN_KEY, {
-    expiresIn: "1m"
+    expiresIn: "2h"
   });
 };
 
