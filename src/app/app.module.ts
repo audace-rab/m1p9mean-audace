@@ -8,13 +8,16 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './page/login/login.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { RegisterComponent } from './page/register/register.component';
+import { authInterceptorProviders } from './service/auth.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +25,9 @@ import { FooterComponent } from './component/footer/footer.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    authInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

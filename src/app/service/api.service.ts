@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { join } from '@fireflysemantics/join'
+import { join } from '@fireflysemantics/join';
+import { TokenStorageService } from './token.service';
+const TOKEN_KEY = 'auth-token';
+const USER_KEY = 'auth-user';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +12,8 @@ import { join } from '@fireflysemantics/join'
 export class ApiService{
     private REST_API_SERVER: string = "http://localhost:3100/api";
     private _baseRoute: string;
+    private tokenService = new TokenStorageService();
+
     constructor(private httpClient: HttpClient) { 
         this._baseRoute = "";
     }
@@ -27,6 +32,11 @@ export class ApiService{
 
     public getFullApiUrl(route = ''){
         return join(this.REST_API_SERVER, this._baseRoute, route);
+    }
+
+    public createSession(user: any){
+        this.tokenService.saveUser(user);
+        this.tokenService.saveToken(user.token);
     }
 
     public get(route?: string){

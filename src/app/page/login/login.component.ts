@@ -16,24 +16,35 @@ export class LoginComponent implements OnInit {
     apiService.baseRoute = 'user';
   }
 
+  errorMessage = null;
+
   ngOnInit() {}
 
+  handleSuccess(data: any){
+    this.apiService.createSession(data);
+  }
+
+  onCheck(){   
+    this.apiService.get("/listAll").pipe(
+      catchError(err => {
+        console.log(err.error);
+        return err;
+      })
+    ).subscribe(res => {
+      console.log(res);
+    })
+  }
+
   onSubmit() {
-    // this.apiService
-    //   .get("")
-    //   .pipe(
-    //     catchError(error => {
-    //       console.log(error);
-    //       return error;
-    //     })
-    //   )
-    //   .subscribe(data => console.log(data));
     this.apiService.post("/login", this.user ).pipe(
           catchError(error => {
             console.log(error.error);
+            this.errorMessage = error.error.message;
             return error;
           })
         )
-        .subscribe(data => console.log(data));
+        .subscribe(data =>{
+          this.handleSuccess(data);
+        });
   }
 }

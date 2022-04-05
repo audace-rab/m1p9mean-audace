@@ -45,7 +45,7 @@ const hashPassword = ({ password: password }, callback) => {
 
 const addNewUser = (user, next) => {
   User.startSession().then(async (session) => {
-    const newUser = new Users(user);
+    const newUser = new User(user);
     await session.withTransaction(async () =>{
       await newUser.save((error, newUser) => {
         if (error) return next(error);
@@ -68,7 +68,7 @@ const addNewUser = (user, next) => {
 
 const generateToken = ({_id, email, profile_id}) => {
   return jwt.sign({ _id,email, profile_id}, process.env.TOKEN_KEY, {
-    expiresIn: "2h"
+    expiresIn: "1m"
   });
 };
 
