@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { catchError } from 'rxjs';
 import { ApiService } from 'src/app/service/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
     password: null
   };
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private router: Router) {
     apiService.baseRoute = 'user';
   }
 
@@ -46,6 +47,7 @@ export class LoginComponent implements OnInit {
         )
         .subscribe((data: any) =>{
           this.handleSuccess(data);
+          this.router.navigate(["admin/home/dashboard"]);
         });
   }
 }
