@@ -6,8 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './page/login/login.component';
-import { NavbarComponent } from './component/navbar/navbar.component';
-import { FooterComponent } from './component/footer/footer.component';
 import { RegisterComponent } from './page/register/register.component';
 import { authInterceptorProviders } from './service/auth.interceptor';
 
@@ -15,8 +13,6 @@ import { authInterceptorProviders } from './service/auth.interceptor';
   declarations: [
     AppComponent,
     LoginComponent,
-    NavbarComponent,
-    FooterComponent,
     RegisterComponent
   ],
   imports: [
