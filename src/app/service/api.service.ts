@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { join } from '@fireflysemantics/join';
 import { TokenStorageService } from './token.service';
+import { environment } from '../../environments/environment'
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
 
@@ -10,7 +11,7 @@ const USER_KEY = 'auth-user';
 })
 
 export class ApiService{
-    private REST_API_SERVER: string = "http://localhost:3100/api";
+    private REST_API_SERVER: string = environment.apiUrl;
     private _baseRoute: string;
     private tokenService = new TokenStorageService();
 
