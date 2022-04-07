@@ -1,12 +1,14 @@
 import { Component, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { TokenStorageService } from 'src/app/service/token.service';
 
 declare var $: any;
 
 @Component({
   selector: 'app-navigation',
-  templateUrl: './navigation.component.html'
+  templateUrl: './navigation.component.html',
+  styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements AfterViewInit {
   @Output() toggleSidebar = new EventEmitter<void>();
@@ -15,8 +17,12 @@ export class NavigationComponent implements AfterViewInit {
 
   public showSearch = false;
 
-  constructor(private modalService: NgbModal) {
+  user : any;
+
+  constructor(private modalService: NgbModal, private tokenService : TokenStorageService) {
+     this.user = tokenService.getUser();
   }
+
 
   // This is for Notifications
   notifications: Object[] = [

@@ -81,5 +81,13 @@ export const ROUTES: RouteInfo[] = [
     class: '',
     extralink: false,
     submenu: []
+  },
+  {
+    path: 'component/commande',
+    title: 'Commande',
+    icon: 'bi bi-list-check',
+    class: '',
+    extralink: false,
+    submenu: []
   }
 ];

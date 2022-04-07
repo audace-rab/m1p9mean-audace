@@ -13,6 +13,8 @@ var indexRouter = require('./routes/index');
 
 var app = express();
 
+process.env.TZ = "Europe/Moscow";
+
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());

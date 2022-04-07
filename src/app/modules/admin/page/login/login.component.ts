@@ -26,17 +26,6 @@ export class LoginComponent implements OnInit {
     this.apiService.createSession(data);
   }
 
-  onCheck(){   
-    this.apiService.get("/listAll").pipe(
-      catchError(err => {
-        console.log(err.error);
-        return err;
-      })
-    ).subscribe((res: any) => {
-      console.log(res);
-    })
-  }
-
   onSubmit() {
     this.apiService.post("/login", this.user ).pipe(
           catchError(error => {
