@@ -1,5 +1,6 @@
 const User = require("../models/users");
 require("../models/profile");
+require("../models/restaurants");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const SALT_WORK_FACTOR = 10;
@@ -10,7 +11,7 @@ const login = ({ login, password }, next) => {
 
   User.findOne()
     .or([{ login: login }, { email: login }])
-    .populate("profile_id")
+    .populate(["profile_id","resto"])
     .exec((error, user) => {
       if (error) return next(error);
       if (!user) return next(new Error("Erreur Login: Utilisateur non trouvé"));
@@ -52,7 +53,7 @@ const addNewUser = (user, next) => {
         const token = generateToken(newUser);
         newUser.token = token;
         
-        next(null, newUser);
+        // next(null, newUser);
       });
     })
 

@@ -45,6 +45,10 @@ const UsersSchema = new mongoose.Schema({
   },
   token: {
     type: String
+  },
+  resto: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Restaurant'
   }
 });
 

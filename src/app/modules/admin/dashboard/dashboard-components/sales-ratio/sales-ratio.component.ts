@@ -36,7 +36,7 @@ export type salesChartOptions = {
 export class SalesRatioComponent implements OnInit {
 
   @ViewChild("chart") chart: ChartComponent = Object.create(null);
-  public salesChartOptions: Partial<salesChartOptions>;
+  public salesChartOptions: Partial<salesChartOptions> | any;
   constructor() {
     this.salesChartOptions = {
       series: [
@@ -52,7 +52,7 @@ export class SalesRatioComponent implements OnInit {
       chart: {
         fontFamily: 'Montserrat,sans-serif',
         height: 290,
-        type: 'area',
+        type: 'bar',
         toolbar: {
           show: false
         },

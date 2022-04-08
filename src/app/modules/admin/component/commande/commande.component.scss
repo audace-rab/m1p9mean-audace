@@ -1,0 +1,21 @@
+.details-commande :hover{
+    cursor: pointer;
+} 
+
+.modal-commande{
+    background-color: rgba(9, 9, 9, 0.5);
+    z-index: 10;
+}
+
+.modal-content{
+    width: unset !important;
+}
+
+.details-commande-body{
+   img{
+        max-width: unset;
+        height: unset;
+        width: 100px !important;
+        height: auto !important;
+   }
+}
