@@ -1,0 +1,26 @@
+<app-header-navbar></app-header-navbar>
+<div class="row m-2" *ngIf="restoPlat">
+    <div *ngFor="let plat of restoPlat[0].plats" class="col-lg-3 col-md-6">
+        <div class="card plat-card">
+          <img
+            class="card-img-top img-responsive plat-img"
+            src="{{ 'assets/images/plats/' + plat.image }}"
+            alt="Card image cap"
+          />
+          <div class="card-body bg-gray-50">
+            <h4 class="card-title">{{ plat.nom }}</h4>
+            <p class="card-text">
+              {{ plat.prix + " AR" }}
+            </p>
+            <button
+              class="bg-headermobile h-12 pt-3 inline-flex text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg w-48 self-center text-center"
+             (click)="ajouterPanier(plat)"
+            >
+              Ajouter au panier
+            </button>
+          </div>
+        </div>
+      </div>
+</div>
+
+<app-social></app-social>

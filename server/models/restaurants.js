@@ -6,7 +6,7 @@ const restaurantSchema = new mongoose.Schema({
         required: true
     },
     adresse: {
-        type: Number,
+        type: String,
         required: true
     },
     coordonnees: {
@@ -16,6 +16,9 @@ const restaurantSchema = new mongoose.Schema({
     telephone: {
         type: String,
         required: true
+    },
+    image:{
+        type: String
     }
 });
 

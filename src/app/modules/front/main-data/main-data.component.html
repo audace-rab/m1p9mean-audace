@@ -1,0 +1,29 @@
+<div class="hidden sm:block w-full">
+  <!-- <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+    <div class="p-3">
+      <h2><span class="font-bold">Burgeur</span> - 356 items</h2>
+    </div>
+    <div class="p-3 sm:flex">
+      <p class="flex">View: &nbsp;&nbsp;&nbsp;<img src="../../assets/list.png" class="w-6 cursor-pointer" alt=""> &nbsp;
+        <img src="../../assets/table.png" class="w-6 cursor-pointer" alt="">
+      </p>
+      <p class="m-auto">Sort: &nbsp;&nbsp;&nbsp;<a href="#" class="hover:text-rougemate">Populaire</a><span> / </span><a href="#" class="hover:text-rougemate">Nouveau</a><span> /
+        </span><a href="#" class="hover:text-rougemate">Promotion</a></p>
+    </div>
+  </div> -->
+  <div class="w-full">
+    <form>
+    <div #restoSearch class="ml-30 relative mt-3 z-0 mb-2 w-82 group">
+      <span class="absolute inset-y-0 right-0 flex items-center pl-2">
+        <button (click)="addNewItem()" type="submit" class="p-1 focus:outline-none focus:shadow-outline">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </button>
+      </span>
+      <input id="restoSearch" [(ngModel)]="searchText" name="resto-name" type="text" class="block pl-10 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rechercher restaurant... ">  
+    </div>
+  </form>
+    <div class="flex flex-wrap justify-start space-x-2">
+
+    </div>
+  </div>
+</div>

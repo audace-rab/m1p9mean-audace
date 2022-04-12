@@ -1,0 +1,119 @@
+.bubble {
+  position        : relative;
+  width           : 300px;
+  text-align      : center;
+  line-height     : 1.4em;
+  margin          : 40px auto;
+  background-color: #fff;
+  border-radius   : 30px;
+  font-family     : sans-serif;
+  padding         : 20px;
+  font-size       : large;
+}
+
+
+
+.thought {
+  width        : 300px;
+  border-radius: 200px;
+  padding      : 30px;
+}
+
+.thought2 {
+  width        : 300px;
+  border-radius: 200px;
+  padding      : 30px;
+}
+
+.thought2:before,
+.thought2:after {
+  left                 : 10px;
+  bottom               : -50px;
+  width                : 45px;
+  height               : 45px;
+  background-color     : #fff;
+  -webkit-border-radius: 28px;
+  -moz-border-radius   : 28px;
+  border-radius        : 28px;
+}
+
+.thought2:after {
+  width                : 30px;
+  height               : 30px;
+  left                 : 5px;
+  bottom               : -605px;
+  -webkit-border-radius: 18px;
+  -moz-border-radius   : 18px;
+  border-radius        : 18px;
+}
+
+.bubble:before,
+.bubble:after {
+  content : ' ';
+  position: absolute;
+  width   : 0;
+  height  : 0;
+}
+
+.thought:before,
+.thought:after {
+  left                 : 10px;
+  bottom               : -25px;
+  width                : 40px;
+  height               : 40px;
+  background-color     : #fff;
+  -webkit-border-radius: 28px;
+  -moz-border-radius   : 28px;
+  border-radius        : 28px;
+}
+
+.thought:after {
+  width                : 20px;
+  height               : 20px;
+  left                 : 5px;
+  bottom               : -35px;
+  -webkit-border-radius: 18px;
+  -moz-border-radius   : 18px;
+  border-radius        : 18px;
+}
+
+
+a {
+  position       : relative;
+  top            : 10px;
+  display        : inline-block;
+  padding        : 12px 30px;
+  font-weight    : 600;
+  letter-spacing : 1px;
+  color          : red;
+  background     : #f2c373;
+  text-decoration: none;
+  box-shadow     : 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition     : all 0.3s ease 0s;
+  text-transform : uppercase;
+  border-radius  : 10px;
+}
+
+.intro {
+  padding: 98px;
+}
+
+h1 {
+  font-size  : revert;
+  font-weight: revert;
+  font-size: 52px;
+}
+
+h1:nth-child(1) {
+
+  display: block ruby;
+}
+
+h1 img{
+  width: 56px;
+}
+
+p{
+  margin-top: 50px;
+  margin-bottom: 14px;
+}

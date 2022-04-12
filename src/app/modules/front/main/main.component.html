@@ -1,0 +1,95 @@
+<div class="p-9 mb-20">
+  <!-- <div class="menu-left p-5 text-center h-auto ">
+    <div class="w-full h-auto">
+      <img src="../../assets/piment.png" class="w-7 m-auto" />
+      <a href="#" class="hover:text-rougemate active">Boissons</a><span> / </span> <a href="#"
+        class="hover:text-rougemate">Patisserie</a> <span> / </span> <a href="#" class="hover:text-rougemate">Fast
+        Food </a>
+
+      <hr class="w-3/4 m-auto">
+    </div>
+    <div class="w-full h-auto p-5">
+      <p class="text-center uppercase font-bold">Prix</p>
+      <input type="range" class="
+            w-4/5
+            h-6
+            p-0
+            bg-transparent
+            focus:outline-none focus:ring-0 ring-rougemate focus:shadow-none
+          " min="0" max="10000" />
+      <div class="w-full grid gap-2 grid-cols-1 sm:grid-cols-2">
+        <div class="flex">
+          <div class="md:w-1/3 pt-2">
+            <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
+              Ar
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input
+              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="inline-full-name" type="text" value="0">
+          </div>
+        </div>
+        <div class="flex">
+          <div class="md:w-2/3">
+            <input
+              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="inline-full-name" type="text" value="10 000">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="w-full h-auto p-5">
+      <p class="text-center uppercase font-bold">Restaurants</p>
+      
+    </div>
+    <div>
+      <button type="submit" style="width: 50%;" class="text-white w-1/ bg-headermobile hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-headermobile dark:hover:bg-blue-800 dark:focus:ring-blue-900">Search</button>
+    </div>
+  </div> -->
+  <div class="w-auto sm:col-span-3 h-auto p-4 pt-24">
+    <app-main-data #rechercheResto id="rechercheResto" (newItemEvent)="addItem($event)"></app-main-data>
+    <!-- <app-list-produit></app-list-produit> -->
+    <!-- <app-list-resto></app-list-resto> -->
+    <div class="mt-9"></div>
+    <div class="row ml-10">
+      <div *ngFor="let restaurant of restos" class="col-lg-3 col-md-6">
+        <div class="card resto-card">
+          <img
+            class="card-img-top img-responsive resto-img"
+            src="{{ 'assets/images/resto/' + restaurant.image }}"
+            alt="Card image cap"
+          />
+          <div class="card-body bg-gray-50">
+            <h4 class="card-title">{{ restaurant.nom }}</h4>
+            <p class="card-text">
+              {{ restaurant.adresse }}
+            </p>
+            <button
+              class="bg-headermobile h-12 pt-3 inline-flex text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg"
+              (click)="commander(restaurant._id)"
+            >
+              Commander &nbsp;<svg
+                _ngcontent-pru-c51=""
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-6 h-6 dark:text-white motion-safe:animate-wiggle"
+              >
+                <path
+                  _ngcontent-pru-c51=""
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

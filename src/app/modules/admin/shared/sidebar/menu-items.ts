@@ -89,5 +89,13 @@ export const ROUTES: RouteInfo[] = [
     class: '',
     extralink: false,
     submenu: []
+  },
+  {
+    path: 'component/plat',
+    title: 'Plats',
+    icon: 'bi bi-clipboard2-plus',
+    class: '',
+    extralink: false,
+    submenu: []
   }
 ];
