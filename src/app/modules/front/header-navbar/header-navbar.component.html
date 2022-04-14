@@ -66,7 +66,7 @@
       <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         
         <!-- Profile dropdown -->
-        <button ><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+        <button data-modal-toggle="cart-modal"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
           <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
         </svg></button>
         <div class="ml-3 relative">
@@ -125,6 +125,67 @@
     </div>
   </div>
 </nav>
+
+<div class="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="cart-modal" aria-hidden="true" #cart>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Panier</h5>
+        <button type="button" class="close" data-modal-toggle="cart-modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="panierCommande && panierCommande.length > 0;  else panierVide">
+          <table class="show-cart table contenuPanier" >
+            <tr *ngFor="let cmd of panierCommande">
+              <thead class="border border-primary nom-resto">{{cmd.restaurant.nom}}</thead>
+              <tbody class="table">
+                <tr class="table-cmd-child" *ngFor="let plat of cmd.plats">
+                  <td>{{plat.objetPlat.nom}}</td>
+                  <td>{{plat.objetPlat.prix + " Ar"}}</td>
+                  <td>
+                    <div class='input-group'>
+                      <button class='minus-item input-group-addon btn btn-primary'  (click)="enlever(plat)">-</button>
+                      <input min="1" type='number' class='item-count form-control !w-7' (change)="onChange(plat)" [(ngModel)]="plat.quantite" value="{{plat.quantite}}"/>
+                      <button class='plus-item btn btn-primary input-group-addon' (click)="ajouter(plat)">+</button>
+                    </div>
+                  </td>
+                  <td>{{plat.objetPlat.prix * plat.quantite}}</td>
+                  <td>
+                    <button (click)="remove(cmd,plat)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                      </svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2"></td>
+                  <td class="text-center">Total</td>
+                  <td>{{sommer(cmd)}}</td>
+                </tr>
+              </tbody>
+            </tr>
+          </table>
+        </div>
+        <ng-template #panierVide>
+          <div class="h-14">
+            <p>Aucune commande effectuée</p>
+          </div>
+        </ng-template>
+        <div *ngIf="errorMessage !== ''">
+          <p class="text-red-600 text-lg text-center">{{errorMessage}}</p>
+        </div>
+      </div>
+      <div *ngIf="panierCommande && panierCommande.length > 0" class="modal-footer">
+        <button type="button" class="btn btn-outline-success" (click)="valider()">Valider commande</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+
 
 
 <!-- modal-social -->

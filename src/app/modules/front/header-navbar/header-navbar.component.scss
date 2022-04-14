@@ -1,0 +1,39 @@
+.show-cart li {
+    display: flex;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.card-img-top {
+  width: 200px;
+  height: 200px;
+  align-self: center;
+}
+
+.contenuPanier{
+  min-width: 600px;
+}
+
+.table-cmd-child{
+  vertical-align: middle;
+  margin-left: 15px;
+}
+
+.nom-resto{
+  background-color: cadetblue;
+  color: white;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

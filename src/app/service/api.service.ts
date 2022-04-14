@@ -3,8 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { join } from '@fireflysemantics/join';
 import { TokenStorageService } from './token.service';
 import { environment } from '../../environments/environment'
-const TOKEN_KEY = 'auth-token';
-const USER_KEY = 'auth-user';
+import { ClientTokenStorageService } from './client/client.token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,7 @@ export class ApiService{
     private _baseRoute: string;
     private tokenService = new TokenStorageService();
 
-    constructor(private httpClient: HttpClient) { 
+    constructor(private httpClient: HttpClient, private clientTokenService: ClientTokenStorageService) { 
         this._baseRoute = "";
     }
 
@@ -38,6 +37,11 @@ export class ApiService{
     public createSession(user: any){
         this.tokenService.saveUser(user);
         this.tokenService.saveToken(user.token);
+    }
+
+    public createClientSession(client: any){
+        this.clientTokenService.saveUser(client);
+        this.clientTokenService.saveToken(client.token);
     }
 
     public get(route?: string){

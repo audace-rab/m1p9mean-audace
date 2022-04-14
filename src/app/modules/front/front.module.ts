@@ -5,6 +5,7 @@ import { FrontRoutingModule } from './front-routing.module';
 import { FrontComponent } from './front.component';
 import { ListRestoComponent } from './list-resto/list-resto.component';
 import { PlatsCommandeComponent } from './plats-commande/plats-commande.component';
+import { NgbdAlertBasicComponent } from '../admin/component/alert/alert.component';
 
 
 @NgModule({

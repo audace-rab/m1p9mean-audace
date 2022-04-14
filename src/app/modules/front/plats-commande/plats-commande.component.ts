@@ -31,45 +31,45 @@ export class PlatsCommandeComponent implements OnInit {
   ajouterPanier(plat: any){
     var sessionCommande = this.panierService.getCart();
     if(Object.entries(sessionCommande).length != 0){
-      var nouveauResto = true;
-      sessionCommande.forEach((element : any) => {
-        if(element.restaurant === this.restoPlat[0].resto._id){
-          nouveauResto = false;
-          var nouveauPlat = true;
-          element.plats.forEach((plt : any) => {
-            if(plt._id === plat._id){
-              nouveauPlat = false;   
-              console.log(plt._id);      
+      var restoExist = false;
+      for(var i=0 ; i<sessionCommande.length; i++){
+        if(sessionCommande[i].restaurant._id === this.restoPlat[0].resto._id){
+          restoExist = true;
+          var platExist = false;
+          for(var j=0; j<sessionCommande[i].plats.length; j++){
+            if(sessionCommande[i].plats[j].objetPlat._id === plat._id){
+              platExist = true;
+              break;
             }
-          })
-          if(nouveauPlat){
-            element.plats.push(plat._id);
+          }
+          if(!platExist){
+            var plt = {"objetPlat": plat, "quantite": 1};
+            sessionCommande[i].plats.push(plt);
           }
         }
-      });
-      if(nouveauResto){
-        console.log('1');
+      }
+      if(!restoExist){
+        var plt = {"objetPlat": plat, "quantite": 1};
         var cmd = {
-          "restaurant" : this.restoPlat[0].resto._id,
-          "plats": [plat._id]
-        };
+          "plats" : [plt],
+          "restaurant" : this.restoPlat[0].resto
+        }
+        console.log(cmd);
         sessionCommande.push(cmd);
-        this.panierService.saveCart(sessionCommande);
       }
     }
     else{
       sessionCommande = [];
-      console.log('2');
-      var cmd = {
-        "restaurant" : this.restoPlat[0].resto._id,
-        "plats": [plat._id]
-      };
-      sessionCommande.push(cmd);
-      this.panierService.saveCart(sessionCommande);
-
-      
+      var plt = {"objetPlat": plat, "quantite": 1};
+        var cmd = {
+          "plats" : [plt],
+          "restaurant" : this.restoPlat[0].resto
+        }
+        console.log(cmd); 
+        sessionCommande.push(cmd);
     }
-    console.log(sessionCommande);
+
+    this.panierService.saveCart(sessionCommande);
   }
 
 }

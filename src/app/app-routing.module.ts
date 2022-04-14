@@ -5,7 +5,7 @@ import { PlatsCommandeComponent } from './modules/front/plats-commande/plats-com
 
 
 const routes: Routes = [
-  { path: "", redirectTo: "admin", pathMatch: "full"},
+  { path: "", redirectTo: "front", pathMatch: "full"},
   { path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule) },
   { path: 'front', component : HomeComponent },
   { path: 'front/commande', component : PlatsCommandeComponent },
