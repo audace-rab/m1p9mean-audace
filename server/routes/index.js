@@ -12,8 +12,8 @@ const restoPlatRoute = require('../routes/resto-plat-route');
 
 router.use('/user',userRoute);
 router.use('/plat',platRoute);
-router.use('/commande',commandeRoute);
 router.use('/restaurant',restoRoute);
 router.use('/restoPlat',restoPlatRoute);
+router.use('/commande',commandeRoute);
 
 module.exports = router;

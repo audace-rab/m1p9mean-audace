@@ -36,7 +36,9 @@ export class LoginComponent implements OnInit {
         )
         .subscribe((data: any) =>{
           this.handleSuccess(data);
-          this.router.navigate(["admin/home/dashboard"]);
+          console.log("data",data);
+          if(data.profile_id.profile_name !== 'client') this.router.navigate(["admin/home/dashboard"]);
+          else this.router.navigate(["front"]);
         });
   }
 }

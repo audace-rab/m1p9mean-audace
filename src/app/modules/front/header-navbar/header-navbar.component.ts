@@ -36,7 +36,7 @@ export class HeaderNavbarComponent implements OnInit {
     private clientTokenService : ClientTokenStorageService,
     private apiService: ApiService,
   ) {
-    apiService.baseRoute = "commande";
+    
   }
 
   ngAfterViewInit(): void {
@@ -109,7 +109,7 @@ export class HeaderNavbarComponent implements OnInit {
   }
 
   valider(){
-    if(this.verifierUser()){
+    var validUser = this.verifierUser();
       this.panierCommande.forEach((cmd: any) => {
         cmd.plats.forEach((plat: any) => {
           if(plat.quantite === 0){
@@ -117,17 +117,19 @@ export class HeaderNavbarComponent implements OnInit {
           }
         });
         cmd["client"] = this.clientTokenService.getUser()._id;
-        this.apiService.post("/commander", this.panierCommande ).pipe(
-          catchError(error => {
-            return error;
-          })
-        )
-        .subscribe((data: any) =>{
-    
-        });
+        this.panierService.saveCart(this.panierCommande);
+        this.apiService.baseRoute = "commande";
+        if(validUser){
+          this.apiService.post("/commander", cmd ).pipe(
+            catchError(error => {
+              return error;
+            })
+          )
+          .subscribe((data: any) =>{
+            
+          });
+        }
       });  
-    }
-
   }
 
   ngOnInit() {
